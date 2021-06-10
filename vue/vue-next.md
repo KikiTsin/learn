@@ -176,7 +176,7 @@ renderer h vnode apiCreateApp apiLifecycle apiWatch等核心运行时函数
       - patch(container._vnode || null, vnode, container, null, null, null, isSVG)
           - 根据vnode.type判断类型，是processText processCommentNode processFragment processComponent 还是processElement
           - 根据type shapeFlag判断出来先走processComponent逻辑：mountComponent
-          - mountComponent
+          - mountComponent  renderer.ts
               - 创建instance（见下图）
               - setupComponent(instance)
                   - **component.ts**: setupStatefulComponent
