@@ -1,9 +1,6 @@
 疑问：
-- rollup.config.js 里返回的是一个array[config] ??? 还可以接受数组？？ 
-- TODO: createApp defineComponent
-- effect 
+- TODO: defineComponent
 - ShapeFlags patchFlag代表什么， 1<< 2 enum代表什么？
-- .d.ts声明文件如何做的？.ts里也有一些declare module
 - watcher deps等没看到，再看下proxy has set get方法
 - 有很多个proxy，具体看看怎么用的
 
@@ -12,9 +9,41 @@
 命令行：
 - dev
 - build
+  - rollup.config.js 里返回的是一个array[config],[如图](./rollupConfig.png)
+  - brotli: 代码压缩
+  - .d.ts声明文件，用@microsoft/api-extractor，[config](./apiExtractorConfig.png)，tsc也行
+  - execa.sync('git', ['rev-parse', 'HEAD']).stdout
+  - 很多打包命令时，根据cpu处理 性能优化？
+  ```javascript
+  async function runParallel(maxConcurrency, source, iteratorFn) {
+    const ret = []
+    const executing = []
+    for (const item of source) {
+      const p = Promise.resolve().then(() => iteratorFn(item, source))
+      ret.push(p)
+
+      if (maxConcurrency <= source.length) {
+        const e = p.then(() => executing.splice(executing.indexOf(e), 1))
+        executing.push(e)
+        if (executing.length >= maxConcurrency) {
+          await Promise.race(executing)
+        }
+      }
+    }
+    return Promise.all(ret)
+  }
+  ```
 - serve
 - release
-
+  - 更新root version，各packages version ; dependencies peerdependencies version;semver inquiry 确定版本
+  - tag commit 
+  - build changelog test等执行各种命令
+  - yarn publish
+  ```javascript
+  await runIfNotDry('git', ['push', 'origin', `refs/tags/v${targetVersion}`])
+  // 获取最近一次commit id
+  const commit = execa.sync('git', ['rev-parse', 'HEAD']).stdout.slice(0, 7)
+  ```
 ## packages/vue
 主要是依赖@vue/compiler-dom @vue/runtime-dom两个包，返回了如下代码所示，跟vue2.**系列一样又不一样，compile编译函数，都是通过baseCompile parse generate生成code ast map等信息，但是parse transform generate里的逻辑不一样了
 
@@ -185,7 +214,7 @@ renderer h vnode apiCreateApp apiLifecycle apiWatch等核心运行时函数
                       - Component.render = **compile(template, finalCompilerOptions)**，这里compile===**compileToFunction**； 这里Component= instance.type；同时：instance.render = (Component.render || NOOP) as InternalRenderFunction
               - setupRenderEffect(instance,initialVNode,container,anchor,parentSuspense,isSVG,optimized)
                   - instance.update= effect(fn, params), 这其实是一个reactiveEffect构造函数，effect.__isEffect = true; effect.raw = fn; effect.deps = []; effect执行的过程中，effectStack有一次入栈出栈的操作，activeEffect=当前effect
-                  - 这里立即执行了fn方法，主要运行render获取vnode，再patch一遍
+                  - 这里!options.lazy 所以立即执行了fn方法，主要运行render获取vnode，再patch一遍
 ```javascript
 const subTree = (instance.subTree = renderComponentRoot(instance));
     // renderComponentRoot: result = normalizeVNode(render.call(proxyToUse, proxyToUse, renderCache, props, setupState, data, ctx));
