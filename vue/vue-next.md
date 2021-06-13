@@ -1,7 +1,6 @@
 疑问：
-- TODO: defineComponent
-- ShapeFlags patchFlag代表什么， 1<< 2 enum代表什么？
-- watcher deps等没看到，再看下proxy has set get方法
+- TODO: render
+- ShapeFlags patchFlag代表什么
 - 有很多个proxy，具体看看怎么用的
 
 
@@ -43,6 +42,18 @@
   await runIfNotDry('git', ['push', 'origin', `refs/tags/v${targetVersion}`])
   // 获取最近一次commit id
   const commit = execa.sync('git', ['rev-parse', 'HEAD']).stdout.slice(0, 7)
+  ```
+- jest
+- commit codes
+  ```javascript
+    // 获取git参数
+    const msgPath = process.env.GIT_PARAMS
+    const msg = require('fs')
+      .readFileSync(msgPath, 'utf-8')
+      .trim()
+    // 正则匹配commit msg
+    const commitRE = /^(revert: )?(feat|fix|docs|dx|style|refactor|perf|test|workflow|build|ci|chore|types|wip|release)(\(.+\))?: .{1,50}/
+    commitRE.test(msg)
   ```
 ## packages/vue
 主要是依赖@vue/compiler-dom @vue/runtime-dom两个包，返回了如下代码所示，跟vue2.**系列一样又不一样，compile编译函数，都是通过baseCompile parse generate生成code ast map等信息，但是parse transform generate里的逻辑不一样了
@@ -91,6 +102,206 @@ compileToFunction() {
 
   return (compileCache[key] = render)
 }
+```
+
+## reactivity
+### ref
+ref 调用createReactiveObject，通过proxy进行代理 baseHandler包括 get set has delete等，同时也缓存了proxyMap
+get 核心内容 Reflect.get(obj, key, receiver)
+set 核心内容 Reflect.set(obj, key, value, receiver)
+
+对于array, 重写了push等方法，比如push：每push一次，调用set 赋值index -- value; 并且调用set 赋值 length
+```javascript
+function createReactiveObject(
+  target: Target,
+  isReadonly: boolean,
+  baseHandlers: ProxyHandler<any>,
+  collectionHandlers: ProxyHandler<any>,
+  proxyMap: WeakMap<Target, any>
+) {
+  // 判断是否是object
+  if (!isObject(target)) {
+    if (__DEV__) {
+      console.warn(`value cannot be made reactive: ${String(target)}`)
+    }
+    return target
+  }
+  // target is already a Proxy, return it.
+  // exception: calling readonly() on a reactive object
+  if (
+    target[ReactiveFlags.RAW] &&
+    !(isReadonly && target[ReactiveFlags.IS_REACTIVE])
+  ) {
+    return target
+  }
+  // target already has corresponding Proxy
+  const existingProxy = proxyMap.get(target)
+  if (existingProxy) {
+    return existingProxy
+  }
+  // only a whitelist of value types can be observed.
+  const targetType = getTargetType(target)
+  if (targetType === TargetType.INVALID) {
+    return target
+  }
+  const proxy = new Proxy(
+    target,
+    targetType === TargetType.COLLECTION ? collectionHandlers : baseHandlers
+  )
+  proxyMap.set(target, proxy)
+  return proxy
+}
+```
+
+### set
+数据变更的时候，触发proxy里的setter，setter触发trigger，获取depsMap，再根据key获取对应数据key的effects function，在执行effect，如有scheduler的话，先调度。。,最终effect fn为instance._update方法
+
+主要是:
+```javascript
+...
+trigger(target, TriggerOpTypes.SET, key, value, oldValue)
+...
+const depsMap = targetMap.get(target)
+...
+add(depsMap.get(key))
+...
+effect()
+```
+[depsMap-reactiveEffect](./setter-->%20trigger%20--->effect--->%20instance._update--->%20patch.png)
+
+setter：
+```javascript
+function createSetter(shallow = false) {
+  return function set(
+    target: object,
+    key: string | symbol,
+    value: unknown,
+    receiver: object
+  ): boolean {
+    let oldValue = (target as any)[key]
+    if (!shallow) {
+      value = toRaw(value)
+      oldValue = toRaw(oldValue)
+      if (!isArray(target) && isRef(oldValue) && !isRef(value)) {
+        oldValue.value = value
+        return true
+      }
+    } else {
+      // in shallow mode, objects are set as-is regardless of reactive or not
+    }
+
+    const hadKey =
+      isArray(target) && isIntegerKey(key)
+        ? Number(key) < target.length
+        : hasOwn(target, key)
+    const result = Reflect.set(target, key, value, receiver)
+    // don't trigger if target is something up in the prototype chain of original
+    if (target === toRaw(receiver)) {
+      if (!hadKey) {
+        trigger(target, TriggerOpTypes.ADD, key, value)
+      } else if (hasChanged(value, oldValue)) {
+        trigger(target, TriggerOpTypes.SET, key, value, oldValue)
+      }
+    }
+    return result
+  }
+}
+```
+
+trigger
+```javascript
+export function trigger(
+  target: object, // data数据
+  type: TriggerOpTypes, // 'set'
+  key?: unknown, // 'currentBranch'
+  newValue?: unknown, // qinqi
+  oldValue?: unknown, // master
+  oldTarget?: Map<unknown, unknown> | Set<unknown>
+) {
+  const depsMap = targetMap.get(target)
+  if (!depsMap) {
+    // never been tracked
+    return
+  }
+
+  const effects = new Set<ReactiveEffect>()
+  const add = (effectsToAdd: Set<ReactiveEffect> | undefined) => {
+    if (effectsToAdd) {
+      effectsToAdd.forEach(effect => {
+        if (effect !== activeEffect || effect.allowRecurse) {
+          effects.add(effect)
+        }
+      })
+    }
+  }
+
+  if (type === TriggerOpTypes.CLEAR) {
+    // collection being cleared
+    // trigger all effects for target
+    depsMap.forEach(add)
+  } else if (key === 'length' && isArray(target)) {
+    depsMap.forEach((dep, key) => {
+      if (key === 'length' || key >= (newValue as number)) {
+        add(dep)
+      }
+    })
+  } else {
+    // schedule runs for SET | ADD | DELETE
+    if (key !== void 0) {
+      add(depsMap.get(key))
+    }
+
+    // also run for iteration key on ADD | DELETE | Map.SET
+    switch (type) {
+      case TriggerOpTypes.ADD:
+        if (!isArray(target)) {
+          add(depsMap.get(ITERATE_KEY))
+          if (isMap(target)) {
+            add(depsMap.get(MAP_KEY_ITERATE_KEY))
+          }
+        } else if (isIntegerKey(key)) {
+          // new index added to array -> length changes
+          add(depsMap.get('length'))
+        }
+        break
+      case TriggerOpTypes.DELETE:
+        if (!isArray(target)) {
+          add(depsMap.get(ITERATE_KEY))
+          if (isMap(target)) {
+            add(depsMap.get(MAP_KEY_ITERATE_KEY))
+          }
+        }
+        break
+      case TriggerOpTypes.SET:
+        if (isMap(target)) {
+          add(depsMap.get(ITERATE_KEY))
+        }
+        break
+    }
+  }
+
+  const run = (effect: ReactiveEffect) => {
+    if (__DEV__ && effect.options.onTrigger) {
+      effect.options.onTrigger({
+        effect,
+        target,
+        key,
+        type,
+        newValue,
+        oldValue,
+        oldTarget
+      })
+    }
+    if (effect.options.scheduler) {
+      effect.options.scheduler(effect)
+    } else {
+      effect()
+    }
+  }
+
+  effects.forEach(run)
+}
+
 ```
 ## packages/compiler-core
 baseCompile baseParse ast等核心compiler函数，transforms下有针对vFor vOn vIf vModel的解析方法
@@ -221,7 +432,12 @@ const subTree = (instance.subTree = renderComponentRoot(instance));
 patch(null, subTree, container, anchor, instance, parentSuspense, isSVG);
 
 ```
-
+##### defineComponent
+```javascript
+export function defineComponent(options: unknown) {
+  return isFunction(options) ? { setup: options, name: options.name } : options
+}
+```
 
 ## packages/runtime-dom
 这个包里主要是跟dom操作相关的api；包括createApp, directives: vModel vOn vShow指令，nodeOps, modules: attrs class events style等
@@ -281,6 +497,7 @@ function onCompositionEnd(e: Event) {
 }
 
 function trigger(el: HTMLElement, type: string) {
+//   node.dispatchEvent(new Event('input'))
   const e = document.createEvent('HTMLEvents')
   e.initEvent(type, true, true)
   el.dispatchEvent(e)
@@ -298,5 +515,49 @@ export const errorMessages: Record<ErrorCodes, string> = {
 export const enum ErrorCodes {
   // parse errors
   ABRUPT_CLOSING_OF_EMPTY_COMMENT
+}
+```
+
+### 看不懂的代码
+```javascript
+// <> 对比一下
+export function reactive<T extends object>(target: T): UnwrapNestedRefs<T>
+export const reactiveMap = new WeakMap<Target, any>()
+// 第二段
+type Primitive = string | number | boolean | bigint | symbol | undefined | null
+type Builtin = Primitive | Function | Date | Error | RegExp
+export type DeepReadonly<T> = T extends Builtin
+  ? T
+  : T extends Map<infer K, infer V>
+    ? ReadonlyMap<DeepReadonly<K>, DeepReadonly<V>>
+    : T extends ReadonlyMap<infer K, infer V>
+      ? ReadonlyMap<DeepReadonly<K>, DeepReadonly<V>>
+      : T extends WeakMap<infer K, infer V>
+        ? WeakMap<DeepReadonly<K>, DeepReadonly<V>>
+        : T extends Set<infer U>
+          ? ReadonlySet<DeepReadonly<U>>
+          : T extends ReadonlySet<infer U>
+            ? ReadonlySet<DeepReadonly<U>>
+            : T extends WeakSet<infer U>
+              ? WeakSet<DeepReadonly<U>>
+              : T extends Promise<infer U>
+                ? Promise<DeepReadonly<U>>
+                : T extends {}
+                  ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
+                  : Readonly<T>
+// 第三段
+export interface ReactiveEffect<T = any> {
+  (): T // 这个()什么意思
+  _isEffect: true
+  id: number
+  active: boolean
+  raw: () => T
+  deps: Array<Dep>
+  options: ReactiveEffectOptions
+  allowRecurse: boolean
+}
+
+export type ShallowUnwrapRef<T> = {
+  [K in keyof T]: T[K] extends Ref<infer V> ? V : T[K]
 }
 ```
