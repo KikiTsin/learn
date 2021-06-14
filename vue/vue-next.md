@@ -312,6 +312,17 @@ export function trigger(
     - self._value = this.effect(); return self._value
   - set value(newValue: T)
     - this._setter(newValue)
+
+computed跟ref搭配才有用。
+```javascript
+let counter = Vue.ref(0)
+// 因为this.effect()执行的时候，把activeEffect = 当前effect,然后fn(也就是getter)执行的时候，触发绑定的key(counter value变化) get函数内track，把counter fn绑定 存在targetMap中。
+let twiceTheCounter = Vue.computed(() => counter.value * 2)
+// 这里触发counter的set 内 trigger，执行twiceTheCounter 的scheduler方法，把_dirty再设置为false（所以下次twiceTheCounter.value 的时候 才会再次执行effect()）
+counter.value++
+console.log(counter.value) // 1
+console.log(twiceTheCounter.value) // 2
+```
 ## packages/compiler-core
 baseCompile baseParse ast等核心compiler函数，transforms下有针对vFor vOn vIf vModel的解析方法
 
