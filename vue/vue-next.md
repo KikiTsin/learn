@@ -303,6 +303,15 @@ export function trigger(
 }
 
 ```
+### computed
+- 根据传参判断是函数还是{getter setter}对象，是函数的话，赋值getter为options
+- return new ComputedRefImpl( getter, setter, isFunction(getterOrOptions) || !getterOrOptions.set) as any
+- class ComputedRefImpl ()
+  - constructor 把getter存在effect中：this.effect = effect(fn, {lazy: true})
+  - get value
+    - self._value = this.effect(); return self._value
+  - set value(newValue: T)
+    - this._setter(newValue)
 ## packages/compiler-core
 baseCompile baseParse ast等核心compiler函数，transforms下有针对vFor vOn vIf vModel的解析方法
 

@@ -104,7 +104,7 @@ antlr 来生成parser
 js: spider monkey parser api和ast标准———> estree ——> acorn
 acorn:
 ```javascript
-        const acorn = require(‘acorn')
+        const acorn = require('acorn')
         const Parser = acorn.Parser;
         const TokenType = acorn.TokenType // 关键字，比如const import等，是一个TokenType实例
         Parser.acorn.keywordsTypes[‘abc’] = new TokenType(‘abc’, {keyword: ‘abc’}) // TokenType(label, conf) { this.label = label; this.keyword = conf.keyword }
