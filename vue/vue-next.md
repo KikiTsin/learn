@@ -107,8 +107,8 @@ compileToFunction() {
 ## reactivity
 ### ref
 ref 调用createReactiveObject，通过proxy进行代理 baseHandler包括 get set has delete等，同时也缓存了proxyMap
-get 核心内容 Reflect.get(obj, key, receiver)
-set 核心内容 Reflect.set(obj, key, value, receiver)
+get 核心内容 Reflect.get(obj, key, receiver); track(target, TrackOpTypes.GET, key) // track用法 参考computed
+set 核心内容 Reflect.set(obj, key, value, receiver); trigger(target, TriggerOpTypes.SET, key, value, oldValue) // trigger用法 参考computed
 
 对于array, 重写了push等方法，比如push：每push一次，调用set 赋值index -- value; 并且调用set 赋值 length
 ```javascript
