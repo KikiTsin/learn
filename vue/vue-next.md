@@ -1,9 +1,13 @@
 疑问：
-- TODO: render
+- TODO: render teleport resolveComponent watchEffect
 - ShapeFlags patchFlag代表什么
 - 有很多个proxy，具体看看怎么用的
 
+```javascript
+const count = ref(0)
 
+watchEffect(() => console.log(count.value))
+```
 
 命令行：
 - dev
@@ -323,6 +327,27 @@ counter.value++
 console.log(counter.value) // 1
 console.log(twiceTheCounter.value) // 2
 ```
+### toRef
+todo
+```javascript
+// 遗憾的是，使用解构的两个 property 的响应性都会丢失。对于这种情况，我们需要将我们的响应式对象转换为一组 ref。这些 ref 将保留与源对象的响应式关联：
+
+import { reactive, toRefs } from 'vue'
+
+const book = reactive({
+  author: 'Vue Team',
+  year: '2020',
+  title: 'Vue 3 Guide',
+  description: 'You are reading this book right now ;)',
+  price: 'free'
+})
+
+let { author, title } = toRefs(book)
+
+title.value = 'Vue 3 Detailed Guide' // 我们需要使用 .value 作为标题，现在是 ref
+console.log(book.title) // 'Vue 3 Detailed Guide'
+```
+
 ## packages/compiler-core
 baseCompile baseParse ast等核心compiler函数，transforms下有针对vFor vOn vIf vModel的解析方法
 
