@@ -3,6 +3,7 @@
 [coursera maching-learning](https://www.coursera.org/learn/machine-learning/lecture/zcAuT/welcome-to-machine-learning)
 
 [tensorflow](https://github.com/tensorflow/tensorflow)
+[ml5.js](https://learn.ml5js.org/#/)
 
 [掘金 阿里巴巴TXD](https://juejin.cn/user/1538972008332440/posts)
 [知乎](https://zhuanlan.zhihu.com/p/128669062)
