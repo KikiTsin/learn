@@ -1,0 +1,23 @@
+{
+  "name": "learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "chrome-devtools.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cdp": "node --inspect=9222 chrome-devtools.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KikiTsin/learn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KikiTsin/learn/issues"
+  },
+  "homepage": "https://github.com/KikiTsin/learn#readme",
+  "dependencies": {
+    "chrome-remote-interface": "^0.31.0"
+  }
+}
