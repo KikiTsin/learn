@@ -1,13 +1,9 @@
 ## TODO
-5+9 还没看
-代码仓库看了前三个parameter acorn tracker
 vue-template-compiler
 postcss
 htmlparser2
 
 ## ？？？
-- @babel/template 待用
-- @babel/code-frame 待用
 - @babel/helpers 待用
 - source-map生成那里没太看明白
 - plugin测试，babel-plugin-tester code那里 如何写复杂的测试逻辑呢 fixture等都是什么意思？
@@ -86,6 +82,11 @@ presets: [       
 
 babel8 优化了babel7 @baben-transform-plugin 与preset-env 配合时， 指定高版本，但是多引入了pollyfill的问题
 
+templateLiteral: ast模块 quasis
+class: path.node.superClass  path.node.override
+
+path.scope.getBinding
+path.scope.rename
 
 ## Date 05-07
 @babel/parser, acorn, terser 

@@ -1,0 +1,1 @@
+- doctrine 用法见src/doctrine.js

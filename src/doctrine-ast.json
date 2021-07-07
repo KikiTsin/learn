@@ -1,0 +1,77 @@
+{
+  "description": "This function comment is parsed by doctrine",
+  "tags": [
+    {
+      "title": "param",
+      "description": null,
+      "lineNumber": 2,
+      "range": [
+        54,
+        83
+      ],
+      "type": {
+        "type": "RecordType",
+        "fields": [
+          {
+            "type": "FieldType",
+            "key": "ok",
+            "value": {
+              "type": "NameExpression",
+              "name": "String",
+              "range": [
+                66,
+                72
+              ]
+            },
+            "range": [
+              63,
+              72
+            ]
+          }
+        ],
+        "range": [
+          62,
+          73
+        ]
+      },
+      "name": "userName"
+    },
+    {
+      "title": "param",
+      "description": null,
+      "lineNumber": 3,
+      "range": [
+        88,
+        109
+      ],
+      "type": {
+        "type": "RecordType",
+        "fields": [
+          {
+            "type": "FieldType",
+            "key": "qinqi",
+            "value": null,
+            "range": [
+              97,
+              102
+            ]
+          }
+        ],
+        "range": [
+          96,
+          103
+        ]
+      },
+      "name": "test"
+    },
+    {
+      "title": "url",
+      "description": "https://baidu.com.cn",
+      "lineNumber": 4,
+      "range": [
+        113,
+        138
+      ]
+    }
+  ]
+}

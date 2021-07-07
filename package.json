@@ -19,5 +19,9 @@
   "homepage": "https://github.com/KikiTsin/learn#readme",
   "dependencies": {
     "chrome-remote-interface": "^0.31.0"
+  },
+  "devDependencies": {
+    "doctrine": "^3.0.0",
+    "fs-extra": "^10.0.0"
   }
 }
