@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "joi",
+            "program": "${workspaceFolder}/src/joi.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "name": "cdp",
             "request": "launch",
             "runtimeArgs": [

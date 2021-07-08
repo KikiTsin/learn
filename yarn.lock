@@ -2,6 +2,35 @@
 # yarn lockfile v1
 
 
+"@hapi/hoek@^9.0.0":
+  version "9.2.0"
+  resolved "https://registry.npm.taobao.org/@hapi/hoek/download/@hapi/hoek-9.2.0.tgz?cache=0&sync_timestamp=1618694570157&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40hapi%2Fhoek%2Fdownload%2F%40hapi%2Fhoek-9.2.0.tgz#f3933a44e365864f4dad5db94158106d511e8131"
+  integrity sha1-85M6RONlhk9NrV25QVgQbVEegTE=
+
+"@hapi/topo@^5.0.0":
+  version "5.1.0"
+  resolved "https://registry.nlark.com/@hapi/topo/download/@hapi/topo-5.1.0.tgz#dc448e332c6c6e37a4dc02fd84ba8d44b9afb012"
+  integrity sha1-3ESOMyxsbjek3AL9hLqNRLmvsBI=
+  dependencies:
+    "@hapi/hoek" "^9.0.0"
+
+"@sideway/address@^4.1.0":
+  version "4.1.2"
+  resolved "https://registry.nlark.com/@sideway/address/download/@sideway/address-4.1.2.tgz?cache=0&sync_timestamp=1620367945721&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40sideway%2Faddress%2Fdownload%2F%40sideway%2Faddress-4.1.2.tgz#811b84333a335739d3969cfc434736268170cad1"
+  integrity sha1-gRuEMzozVznTlpz8Q0c2JoFwytE=
+  dependencies:
+    "@hapi/hoek" "^9.0.0"
+
+"@sideway/formula@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npm.taobao.org/@sideway/formula/download/@sideway/formula-3.0.0.tgz#fe158aee32e6bd5de85044be615bc08478a0a13c"
+  integrity sha1-/hWK7jLmvV3oUES+YVvAhHigoTw=
+
+"@sideway/pinpoint@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/@sideway/pinpoint/download/@sideway/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
+  integrity sha1-z/j/rcNyrSn9P3gneusp5jLMcN8=
+
 chrome-remote-interface@^0.31.0:
   version "0.31.0"
   resolved "https://registry.nlark.com/chrome-remote-interface/download/chrome-remote-interface-0.31.0.tgz#0ba5549047cbbeaddac9f898dce37721170d2a21"
@@ -40,6 +69,17 @@ graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   version "4.2.6"
   resolved "https://registry.nlark.com/graceful-fs/download/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
   integrity sha1-/wQLKwhTsjw9MQJ1I3BvGIXXa+4=
+
+joi@^17.4.0:
+  version "17.4.0"
+  resolved "https://registry.npm.taobao.org/joi/download/joi-17.4.0.tgz?cache=0&sync_timestamp=1612746637426&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjoi%2Fdownload%2Fjoi-17.4.0.tgz#b5c2277c8519e016316e49ababd41a1908d9ef20"
+  integrity sha1-tcInfIUZ4BYxbkmrq9QaGQjZ7yA=
+  dependencies:
+    "@hapi/hoek" "^9.0.0"
+    "@hapi/topo" "^5.0.0"
+    "@sideway/address" "^4.1.0"
+    "@sideway/formula" "^3.0.0"
+    "@sideway/pinpoint" "^2.0.0"
 
 jsonfile@^6.0.1:
   version "6.1.0"

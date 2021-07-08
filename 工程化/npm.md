@@ -1,1 +1,2 @@
 - doctrine 用法见src/doctrine.js
+- joi 用声明式的条件语句 来表达 数据结构，并判断是否符合条件 validate，用法见src/joi.js

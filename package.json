@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "doctrine": "^3.0.0",
-    "fs-extra": "^10.0.0"
+    "fs-extra": "^10.0.0",
+    "joi": "^17.4.0"
   }
 }
