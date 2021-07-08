@@ -156,4 +156,15 @@ function strip(options = {}) {
 }
 ```
 
-## esbuild TODO
+## esbuild
+[why fast](https://esbuild.github.io/faq/#why-is-esbuild-fast)
+- 用go编写，并且编译成native code；JS JIT即时编译性能不高；
+- go是为并行设计的，而JS不是。GO可以在线程之间共享内存；
+- esbuild从零开始，避免了引用第三方库带来的不同ast之间转译的问题。
+- 高效利用内存
+
+cmd/esbuild/main.go主入口文件，cli.Run(osArgs)
+pkg/cli/cli.go
+pkg/api/api_impl.go
+
+**TODO**
