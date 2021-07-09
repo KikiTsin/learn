@@ -2,3 +2,9 @@
 - joi 用声明式的条件语句 来表达 数据结构，并判断是否符合条件 validate，用法见src/joi.js
 - base64id
 - ts-node
+- memory-fs, A simple in-memory filesystem. Holds data in a javascript object.
+- mime
+- ws
+- url
+  - url.parse(scripturl)
+  - url.format
