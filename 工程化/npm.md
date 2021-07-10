@@ -1,10 +1,11 @@
 - doctrine 用法见src/doctrine.js
 - joi 用声明式的条件语句 来表达 数据结构，并判断是否符合条件 validate，用法见src/joi.js
-- base64id
+- base64id: base64id.generateId()--->DStdW-xboAOggfv0AAAA
 - ts-node
 - memory-fs, A simple in-memory filesystem. Holds data in a javascript object.
-- mime
+- mime: mime.getType('css')--> text/css
 - ws
+- sockjs
 - url
   - url.parse(scripturl)
   - url.format
