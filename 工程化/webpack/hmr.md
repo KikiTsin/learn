@@ -3,7 +3,7 @@
 - webpack-dev-middleware
 - webpack/hot
 - webpack/lib/web
-- webpack/lib/HotModuleReplacement.runtime.js HotModuleReplacementPlugin.js （再看下插件js）
+- webpack/lib/HotModuleReplacement.runtime.js HotModuleReplacementPlugin.js （主要做了热更新）
 
 ## 大概
 webpack-dev-server中，引入webpack, 构建了一个webpack实例：
@@ -67,9 +67,59 @@ webpack/hot/only-dev-server.js中module.hot是来自：
  	}
 ```
 
+编译好的代码中webpackHotUpdate怎么来的？hmrplugin做的处理：
+// webpackHotUpdate("main",{})结构是 在hmr plugin中做的处理：
+1. webpackHotUpdate哪里设置的？ webpack/lib/WebpackOptionsDefaulter.js
 ```javascript
-// require("./emitter").on('***', () => {})
-// TODO webpackHotUpdate("main",{})结构
+    this.set("output.hotUpdateFunction", "make", options => {
+		return Template.toIdentifier(
+			"webpackHotUpdate" + Template.toIdentifier(options.output.library)
+		);
+	});
+```
+2. HotModuleReplacementPlugin.js 会把HotModuleReplacement.runtime.js中代码加入bundle包中
+```javascript
+compilation.hooks.additionalChunkAssets.tap("HotModuleReplacementPlugin", () => {
+    const source = hotUpdateChunkTemplate.render(
+	    	chunkId, // ‘main’
+			newModules,
+			removedModules,
+			compilation.hash,
+			compilation.moduleTemplates.javascript, // 这里配置了很多outputOptions.hotUpdateFunction参数
+			compilation.dependencyTemplates
+	);// return ['','']
+})
+```
+3. compilation.moduleTemplates.javascript [数据结构](./hmr.png)
+4. 
+```javascript
+    mainTemplate.hooks.bootstrap.tap(
+	    "HotModuleReplacementPlugin",
+      (source, chunk, hash) => {
+         source = mainTemplate.hooks.hotBootstrap.call(source, chunk, hash);
+         return Template.asString([
+         	source,
+         	"",
+         	hotInitCode
+         		.replace(/\$require\$/g, mainTemplate.requireFn)
+         		.replace(/\$hash\$/g, JSON.stringify(hash))
+         		.replace(/\$requestTimeout\$/g, requestTimeout)
+         		.replace(
+         			/\/\*foreachInstalledChunks\*\//g,
+         			needChunkLoadingCode(chunk)
+         				? "for(var chunkId in installedChunks)"
+         				: `var chunkId = ${JSON.stringify(chunk.id)};`
+         		)
+         ]);
+      }
+    );
+const hotInitCode = Template.getFunctionContent(
+	require("./HotModuleReplacement.runtime"));
+```
+
+打包后的代码：
+```javascript
+// require("./emitter").on('webpackHotUpdate', () => {})
 webpackHotUpdate("main",{
 
 /***/ "./src/index.js":
