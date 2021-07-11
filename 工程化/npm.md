@@ -9,3 +9,8 @@
 - url
   - url.parse(scripturl)
   - url.format
+- hash-sum: hash generator, works in all of node.js, io.js, and the browser
+- loader-utils
+  - 为webpack loader打造
+  - loaderUtils.stringifyRequest(this, "./test.js"); // return: "\"./test.js\""
+  - loaderUtils.getOptions 处理query

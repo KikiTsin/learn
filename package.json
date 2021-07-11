@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/KikiTsin/learn#readme",
   "dependencies": {
-    "chrome-remote-interface": "^0.31.0"
+    "chrome-remote-interface": "^0.31.0",
+    "vue-loader": "^16.3.0"
   },
   "devDependencies": {
     "base64id": "^2.0.0",
