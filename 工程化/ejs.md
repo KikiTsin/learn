@@ -269,6 +269,8 @@ export default class ScopedAnimations extends Component {
 ```
 
 ## 如何解析的templateText字符串的呢?
+- 用正则匹配出 符合api约定的 字符串位置
+- 再对str进行切割，递归处理剩余的str
 ```javascript
 Template.prototype.parseTemplateText = function () {
     var str = `<html>
@@ -287,6 +289,13 @@ Template.prototype.parseTemplateText = function () {
         </html>
     `;
     var pat = /(<%%|%%>|<%=|<%-|<%_|<%#|<%|%>|-%>|_%>)/
+    // result: [
+    //     "<%-", 
+    //     "<%-", 
+    //     index: 214, 
+    //     input: "<html>\n  <head>\n    <title>CSS Modules Webpack Dem…%- html %>\n        \n    </div>\n  </body>\n</html>\n", // 传入的str
+    //     groups: undefined
+    // ]
     var result = pat.exec(str);
     var arr = [];
     var firstPos;
