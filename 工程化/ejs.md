@@ -1,3 +1,19 @@
+## [ejs](https://ejs.co/#install)
+
+### usage
+```javascript
+let template = ejs.compile(str, options);
+template(data);
+// => Rendered HTML string
+
+ejs.render(str, data, options);
+// => Rendered HTML string
+
+ejs.renderFile(filename, data, options, function(err, str){
+    // str => Rendered HTML string
+});
+```
+## 案例
 ejs.compile('templateText') // new Template('templateText', opts)
 ```javascript
 let opts = {
