@@ -21,13 +21,13 @@ module.exports.pitch= function (remainingRequest, precedingRequests, data) {
 
 ``` javascript
 context.async = function async () {
-    if (isdone) { throw new Error(‘aaaa') }
+    if (isdone) { throw new Error('aaaa') }
     isSync = false
     return innerCallback
 }
 
 const innerCallback = context.callback = function () {
-    if (isdone) { throw new Error(‘12121') }
+    if (isdone) { throw new Error('12121') }
     isdone = true
     isSync = false
     try {
