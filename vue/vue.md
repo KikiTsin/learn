@@ -538,9 +538,16 @@ methodsToPatch.forEach(function (method) {
   })
 })
 ```
-## Vuex
 
-## v-Router
+### v-model
+data数据更改如何通知view视图，看👆的数据绑定；
+input输入改动，如何触发data里的数据变化？
+- 在compile generate的时候，已经分析出的[ast语法树](./v-model1.png)，监测到directives model 生成code，[如下：](./v-model1.1.png)
+
+$emit的时候，获取绑定的events事件vm._events[event]，再执行它
+invokeWithErrorHandling
+
+## Vuex
 
 ## build
 **TODO**: 用ts写的？没看到ts构建config
