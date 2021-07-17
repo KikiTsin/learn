@@ -543,7 +543,9 @@ methodsToPatch.forEach(function (method) {
 data数据更改如何通知view视图，看👆的数据绑定；
 input输入改动，如何触发data里的数据变化？
 - 在compile generate的时候，已经分析出的[ast语法树](./v-model1.png)，监测到directives model 生成code，[如下：](./v-model1.1.png)
-
+```javascript
+"_c('div',{attrs:{\"id\":\"demo\"}},[_c('input',{directives:[{name:\"model\",rawName:\"v-model\",value:(currentBranch),expression:\"currentBranch\"}],attrs:{\"name\":\"branch\"},domProps:{\"value\":(currentBranch)},on:{\"input\":function($event){if($event.target.composing)return;currentBranch=$event.target.value}}})])"
+```
 $emit的时候，获取绑定的events事件vm._events[event]，再执行它
 invokeWithErrorHandling
 
