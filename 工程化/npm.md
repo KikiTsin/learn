@@ -15,3 +15,4 @@
   - loaderUtils.stringifyRequest(this, "./test.js"); // return: "\"./test.js\""
   - loaderUtils.getOptions 处理query
   - loaderUtils.interpolateName(loaderContext, "js/[contenthash].script.[ext]", { content: ... }); // => js/9473fdd0d880a43c21b7778d34872157.script.js
+- markdown-it-anchor
