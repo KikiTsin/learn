@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "leetcode",
+            "program": "${workspaceFolder}/算法/leetcode/2.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "name": "joi",
             "program": "${workspaceFolder}/src/joi.js",
             "request": "launch",
