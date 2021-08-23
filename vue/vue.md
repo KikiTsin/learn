@@ -504,6 +504,17 @@ get
 ```
 
 ##### array.js 覆写了原生Array方法
+- 那为什么只对vue内的数据生效呢？不会影响框架外的数组处理呢？
+```javascript
+// observer时处理了value的原型对象
+protoAugment(value, arrayMethods)
+function protoAugment (target, src: Object) {
+  /* eslint-disable no-proto */
+  target.__proto__ = src
+  /* eslint-enable no-proto */
+}
+```
+- array处理
 ```javascript
 const arrayProto = Array.prototype
 export const arrayMethods = Object.create(arrayProto)
@@ -549,6 +560,19 @@ input输入改动，如何触发data里的数据变化？
 $emit的时候，获取绑定的events事件vm._events[event]，再执行它
 invokeWithErrorHandling
 
+### 父子组件渲染顺序：
+
+渲染过程： ❝从父到子，再由子到父；（由外到内再由内到外）❞
+父 beforeCreate->父 created->父 beforeMount->子 beforeCreate->子 created->子 beforeMount->子 mounted->父 mounted
+
+子组件更新过程：
+父 beforeUpdate->子 beforeUpdate->子 updated->父 updated
+
+父组件更新过程：
+父 beforeUpdate->父 updated
+
+销毁过程：
+父 beforeDestroy->子 beforeDestroy->子 destroyed->父 destroyed
 ## Vuex
 
 ## build

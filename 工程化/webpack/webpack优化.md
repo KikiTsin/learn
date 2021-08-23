@@ -14,6 +14,9 @@ webpackPreload 注释，当前导航栏需要
 * preload chunk 具有中等优先级，并立即下载。prefetch chunk 在浏览器闲置时下载。
 * preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻。
 * 浏览器支持程度不同。
+对比一下：
+defer 并行下载，在html parse解析完成后 再执行。
+async 并行下载，会中断html parser；下载完就立即执行。
 
 thread-loader多进程
 terser-webpack-plugin  {parallel: true}
