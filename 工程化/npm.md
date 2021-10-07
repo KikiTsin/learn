@@ -29,3 +29,6 @@ pupa('I like {0} and {1}', ['🦄', '🐮']);
   ![0fc761f10df61f757f8f89ad1c4fbcd7.png](evernotecid://E1014288-8A6B-4300-BE41-9C3A0650317D/appyinxiangcom/34793898/ENResource/p17)
   
 - registry-url 获取镜像
+- download-git-repo
+- gitbeaker/node
+- Metalsmith
