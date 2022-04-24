@@ -18,7 +18,15 @@
   },
   "homepage": "https://github.com/KikiTsin/learn#readme",
   "dependencies": {
+    "acorn": "^8.6.0",
     "chrome-remote-interface": "^0.31.0",
+    "diff": "^5.0.0",
+    "eslump": "^3.0.0",
+    "hash-sum": "^2.0.0",
+    "markdown-it": "^12.2.0",
+    "markdown-it-anchor": "^8.4.1",
+    "serialize-javascript": "^6.0.0",
+    "uuid": "^8.3.2",
     "vue-loader": "^16.3.0"
   },
   "devDependencies": {
