@@ -1002,6 +1002,13 @@
   dependencies:
     "value-or-function" "^3.0.0"
 
+"rxjs@^7.5.5":
+  "integrity" "sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw=="
+  "resolved" "https://mirrors.tencent.com/npm/rxjs/-/rxjs-7.5.5.tgz"
+  "version" "7.5.5"
+  dependencies:
+    "tslib" "^2.1.0"
+
 "safe-buffer@^5.1.0", "safe-buffer@~5.1.0", "safe-buffer@~5.1.1":
   "integrity" "sha1-mR7GnSluAxN0fVm9/St0XDX4go0="
   "resolved" "https://registry.npm.taobao.org/safe-buffer/download/safe-buffer-5.1.2.tgz"
@@ -1159,6 +1166,11 @@
   "version" "2.0.0"
   dependencies:
     "through2" "^2.0.3"
+
+"tslib@^2.1.0":
+  "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
+  "resolved" "https://mirrors.tencent.com/npm/tslib/-/tslib-2.4.0.tgz"
+  "version" "2.4.0"
 
 "type-check@^0.4.0", "type-check@~0.4.0":
   "integrity" "sha1-B7ggO/pwVsBlcFDjzNLDdzC6uPE="

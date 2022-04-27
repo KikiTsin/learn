@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "chrome-devtools.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cdp": "node --inspect=9222 chrome-devtools.js"
@@ -39,6 +40,7 @@
     "joi": "^17.4.0",
     "js-yaml": "^4.1.0",
     "memory-fs": "^0.5.0",
-    "mime": "^2.5.2"
+    "mime": "^2.5.2",
+    "rxjs": "^7.5.5"
   }
 }
