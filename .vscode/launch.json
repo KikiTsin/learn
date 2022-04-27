@@ -15,7 +15,7 @@
         },
         {
             "name": "joi",
-            "program": "${workspaceFolder}/src/joi.js",
+            "program": "${workspaceFolder}/src/gulp-typescript.mjs",
             "request": "launch",
             "skipFiles": [
                 "<node_internals>/**"

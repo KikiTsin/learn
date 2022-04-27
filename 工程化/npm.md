@@ -22,10 +22,10 @@
 - update-notifier 检查 cli 本地版本与线上版本
 - pupa 字符串模版替换
 
-```javascript
-pupa("I like {0} and {1}", ["🦄", "🐮"]);
-//=> 'I like 🦄 and 🐮'
-```
+  ```javascript
+  pupa("I like {0} and {1}", ["🦄", "🐮"]);
+  //=> 'I like 🦄 and 🐮'
+  ```
 
 - boxen 在终端命令行中创建 box，虚线框 +---+
 - latest-version 获取 npm 包的最新版本, 实际用的是 package-json 这个包
@@ -47,8 +47,11 @@ pupa("I like {0} and {1}", ["🦄", "🐮"]);
 - @ls-lint/ls-lint
 - source-map-support 给 nodejs 自动增加 source-map
 
-```javascript
-try {
-  require("source-map-support").install();
-} catch (err) {}
-```
+  ```javascript
+  try {
+    require("source-map-support").install();
+  } catch (err) {}
+  ```
+
+- cli-color
+- fancy-log

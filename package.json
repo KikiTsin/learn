@@ -20,6 +20,7 @@
   "dependencies": {
     "acorn": "^8.6.0",
     "chrome-remote-interface": "^0.31.0",
+    "cli-color": "^2.0.2",
     "diff": "^5.0.0",
     "eslump": "^3.0.0",
     "hash-sum": "^2.0.0",
@@ -32,8 +33,11 @@
   "devDependencies": {
     "base64id": "^2.0.0",
     "doctrine": "^3.0.0",
+    "fancy-log": "^2.0.0",
     "fs-extra": "^10.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "joi": "^17.4.0",
+    "js-yaml": "^4.1.0",
     "memory-fs": "^0.5.0",
     "mime": "^2.5.2"
   }
