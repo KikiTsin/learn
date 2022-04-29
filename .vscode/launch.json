@@ -23,6 +23,15 @@
             "type": "pwa-node"
         },
         {
+            "name": "rxjs",
+            "program": "${workspaceFolder}/src/rxjs.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "name": "cdp",
             "request": "launch",
             "runtimeArgs": [
