@@ -55,3 +55,6 @@
 
 - cli-color
 - fancy-log
+- google-closure-compiler 压缩工具，有三种不同的程度，whitespace\normal\advanced
+- shx 支持跨平台命令，比如：shx ls; shx rm
+- klaw-sync 递归查找目录内的文件，返回数据：[ { path: '/some/dir/file', stats: {} } ]

@@ -106,12 +106,24 @@ import {
 // rpSubject observerB: 4
 // rpSubject observerA: 5
 // rpSubject observerB: 5
+// import { create } from "rxjs-spy";
 
+// const spy = create();
+
+// spy.log("some-tag");
+
+// import { tag } from "rxjs-spy/operators/tag";
+
+// const source = Observable.of("some-value").pipe(tag("some-tag"));
 let abc = new Observable((subscriber) => {
   subscriber.next('kiki');
   subscriber.next('tsin');
 });
-abc.subscribe((name) => {
+abc
+.pipe(
+    map(name => { return name.toUpperCase() }),
+  )
+.subscribe((name) => {
   console.log('expected name:', name)
 })
 // function delay(delayInMillis) {
