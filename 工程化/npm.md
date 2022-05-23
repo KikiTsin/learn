@@ -41,7 +41,7 @@
 - serialize-javascript
 - jest-worker ??? 待学习
 <!-- learned from Terser -->
-- astring 生成 ESTree 标准的 AST，快速
+- astring 生成 ESTree 标准的 AS‘T，快速
 - eslump ？？奇奇怪怪 没太明白
 - esm es module loader 模块打包器
 - @ls-lint/ls-lint
@@ -58,3 +58,4 @@
 - google-closure-compiler 压缩工具，有三种不同的程度，whitespace\normal\advanced
 - shx 支持跨平台命令，比如：shx ls; shx rm
 - klaw-sync 递归查找目录内的文件，返回数据：[ { path: '/some/dir/file', stats: {} } ]
+- classnames 拼接各种classnames
