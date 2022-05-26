@@ -59,3 +59,5 @@
 - shx 支持跨平台命令，比如：shx ls; shx rm
 - klaw-sync 递归查找目录内的文件，返回数据：[ { path: '/some/dir/file', stats: {} } ]
 - classnames 拼接各种classnames
+- @ctrl/tinycolor 颜色处理/转换
+- np: a better npm publish
