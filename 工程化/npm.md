@@ -62,3 +62,4 @@
 - @ctrl/tinycolor 颜色处理/转换
 - np: a better npm publish
 - signale 日志记录器: signale.success('successful');
+- gulp-if 用来处理gulp工具中的条件判断: gulpif(condition, uglify());
