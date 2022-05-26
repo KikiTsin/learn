@@ -61,3 +61,4 @@
 - classnames 拼接各种classnames
 - @ctrl/tinycolor 颜色处理/转换
 - np: a better npm publish
+- signale 日志记录器: signale.success('successful');
