@@ -63,3 +63,5 @@
 - np: a better npm publish
 - signale 日志记录器: signale.success('successful');
 - gulp-if 用来处理gulp工具中的条件判断: gulpif(condition, uglify());
+- history: createBrowserHistory, createHashHistory
+- stylis 一个轻量的css预处理器

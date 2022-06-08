@@ -32,6 +32,15 @@
             "type": "pwa-node"
         },
         {
+            "name": "stylis",
+            "program": "${workspaceFolder}/src/stylis.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "name": "cdp",
             "request": "launch",
             "runtimeArgs": [
