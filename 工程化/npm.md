@@ -65,3 +65,5 @@
 - gulp-if 用来处理gulp工具中的条件判断: gulpif(condition, uglify());
 - history: createBrowserHistory, createHashHistory
 - stylis 一个轻量的css预处理器
+- simple-git 函数式调用git方法，比如 git.status() git.add git.commit
+- [react-docgen-typescript](https://github.com/KikiTsin/react-docgen-typescript) 解析react component的props类型.
