@@ -1,5 +1,33 @@
 中序遍历
 ```javascript
+// 三种方式
+// 1. 递归
+// 2. 迭代
+// 3. Morris
+var morrisFn = function (root) {
+    let res = []
+    let pre = null;
+    while (root) {
+        if (!root.left) {
+            res.push(root.val);
+            root = root.right
+        } else {
+            // predecessor 
+            pre = root.left
+            while (pre.right && pre.right !== root) {
+                pre = pre.right
+            }
+            if (!pre.right) {
+                pre.right = root
+                root = root.left
+            } else {
+                res.push(root.val)
+                pre.right = null;
+                root = root.right
+            }
+        }
+    }
+}
 var inorderBST = function (root) {
     function generateRes (root) {
         let stack = []
