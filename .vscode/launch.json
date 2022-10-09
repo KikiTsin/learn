@@ -5,6 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "es-module-lexer",
+            "program": "${workspaceFolder}/src/es-module-lexer.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
+            "name": "parse5",
+            "program": "${workspaceFolder}/src/parse5.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "name": "leetcode",
             "program": "${workspaceFolder}/算法/leetcode/2.js",
             "request": "launch",
