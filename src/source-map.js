@@ -57,7 +57,7 @@ map.addMapping({
 // }
 console.log(map.toString()); // 生成的mapping
 
-async function test(sourceMapFile, line, column) {
+export async function test(sourceMapFile, line, column) {
   const sourceMapAnalysis = async (sourceMapFile, line, column, offset) => {
     // 通过 sourceMap 库转换为sourceMapConsumer对象
     const consumer = await new sourceMap.SourceMapConsumer(sourceMapFile);

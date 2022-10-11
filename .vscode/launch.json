@@ -5,6 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "rollup-bundle",
+            "program": "${workspaceFolder}/src/rollup.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "name": "es-module-lexer",
             "program": "${workspaceFolder}/src/es-module-lexer.js",
             "request": "launch",
