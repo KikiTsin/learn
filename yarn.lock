@@ -189,25 +189,20 @@
   "resolved" "https://mirrors.cloud.tencent.com/npm/abab/-/abab-2.0.6.tgz"
   "version" "2.0.6"
 
-"acorn-globals@^6.0.0":
-  "integrity" "sha512-ZQl7LOWaF5ePqqcX4hLuv/bLXYQNfNWw2c0/yX/TsPRKamzHcTGQnlCjHT3TsmkOUVEPS3crCxiPfdzE/Trlhg=="
-  "resolved" "https://mirrors.cloud.tencent.com/npm/acorn-globals/-/acorn-globals-6.0.0.tgz"
-  "version" "6.0.0"
+"acorn-globals@^7.0.0":
+  "integrity" "sha512-umOSDSDrfHbTNPuNpC2NSnnA3LUrqpevPb4T9jRx4MagXNS0rs+gwiTcAvqCRmsD6utzsrzNt+ebm00SNWiC3Q=="
+  "resolved" "https://registry.npmmirror.com/acorn-globals/-/acorn-globals-7.0.1.tgz"
+  "version" "7.0.1"
   dependencies:
-    "acorn" "^7.1.1"
-    "acorn-walk" "^7.1.1"
+    "acorn" "^8.1.0"
+    "acorn-walk" "^8.0.2"
 
-"acorn-walk@^7.1.1":
-  "integrity" "sha512-OPdCF6GsMIP+Az+aWfAAOEt2/+iVDKE7oy6lJ098aoe59oAmK76qV6Gw60SbZ8jHuG2wH058GF4pLFbYamYrVA=="
-  "resolved" "https://mirrors.cloud.tencent.com/npm/acorn-walk/-/acorn-walk-7.2.0.tgz"
-  "version" "7.2.0"
+"acorn-walk@^8.0.2":
+  "integrity" "sha512-k+iyHEuPgSw6SbuDpGQM+06HQUa04DZ3o+F6CSzXMvvI5KMvnaEqXe+YVe555R9nn6GPt404fos4wcgpw12SDA=="
+  "resolved" "https://registry.npmmirror.com/acorn-walk/-/acorn-walk-8.2.0.tgz"
+  "version" "8.2.0"
 
-"acorn@^7.1.1":
-  "integrity" "sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A=="
-  "resolved" "https://mirrors.cloud.tencent.com/npm/acorn/-/acorn-7.4.1.tgz"
-  "version" "7.4.1"
-
-"acorn@^8.6.0", "acorn@^8.7.1":
+"acorn@^8.1.0", "acorn@^8.6.0", "acorn@^8.8.0":
   "integrity" "sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w=="
   "resolved" "https://mirrors.cloud.tencent.com/npm/acorn/-/acorn-8.8.0.tgz"
   "version" "8.8.0"
@@ -318,11 +313,6 @@
   dependencies:
     "balanced-match" "^1.0.0"
     "concat-map" "0.0.1"
-
-"browser-process-hrtime@^1.0.0":
-  "integrity" "sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow=="
-  "resolved" "https://mirrors.cloud.tencent.com/npm/browser-process-hrtime/-/browser-process-hrtime-1.0.0.tgz"
-  "version" "1.0.0"
 
 "buffer-equal@^1.0.0":
   "integrity" "sha1-WWFrSYME1Var1GaWayLu2j7KX74="
@@ -547,10 +537,10 @@
   dependencies:
     "ms" "2.1.2"
 
-"decimal.js@^10.3.1":
-  "integrity" "sha512-Nv6ENEzyPQ6AItkGwLE2PGKinZZ9g59vSh2BeH6NqPu0OTKZ5ruJsVqh/orbAnqXc9pBbgXAIrc2EyaCj8NpGg=="
-  "resolved" "https://mirrors.cloud.tencent.com/npm/decimal.js/-/decimal.js-10.4.0.tgz"
-  "version" "10.4.0"
+"decimal.js@^10.4.1":
+  "integrity" "sha512-F29o+vci4DodHYT9UrR5IEbfBw9pE5eSapIJdTqXK5+6hq+t8VRxwQyKlW2i+KDKFkkJQRvFyI/QXD83h8LyQw=="
+  "resolved" "https://registry.npmmirror.com/decimal.js/-/decimal.js-10.4.1.tgz"
+  "version" "10.4.1"
 
 "deep-is@^0.1.3", "deep-is@~0.1.3":
   "integrity" "sha1-pvLc5hL63S7x9Rm3NVHxfoUZmDE="
@@ -1141,18 +1131,18 @@
   dependencies:
     "argparse" "^2.0.1"
 
-"jsdom@^20.0.0":
-  "integrity" "sha512-x4a6CKCgx00uCmP+QakBDFXwjAJ69IkkIWHmtmjd3wvXPcdOS44hfX2vqkOQrVrq8l9DhNNADZRXaCEWvgXtVA=="
-  "resolved" "https://mirrors.cloud.tencent.com/npm/jsdom/-/jsdom-20.0.0.tgz"
-  "version" "20.0.0"
+"jsdom@^20.0.1":
+  "integrity" "sha512-pksjj7Rqoa+wdpkKcLzQRHhJCEE42qQhl/xLMUKHgoSejaKOdaXEAnqs6uDNwMl/fciHTzKeR8Wm8cw7N+g98A=="
+  "resolved" "https://registry.npmmirror.com/jsdom/-/jsdom-20.0.1.tgz"
+  "version" "20.0.1"
   dependencies:
     "abab" "^2.0.6"
-    "acorn" "^8.7.1"
-    "acorn-globals" "^6.0.0"
+    "acorn" "^8.8.0"
+    "acorn-globals" "^7.0.0"
     "cssom" "^0.5.0"
     "cssstyle" "^2.3.0"
     "data-urls" "^3.0.2"
-    "decimal.js" "^10.3.1"
+    "decimal.js" "^10.4.1"
     "domexception" "^4.0.0"
     "escodegen" "^2.0.0"
     "form-data" "^4.0.0"
@@ -1160,18 +1150,17 @@
     "http-proxy-agent" "^5.0.0"
     "https-proxy-agent" "^5.0.1"
     "is-potential-custom-element-name" "^1.0.1"
-    "nwsapi" "^2.2.0"
-    "parse5" "^7.0.0"
+    "nwsapi" "^2.2.2"
+    "parse5" "^7.1.1"
     "saxes" "^6.0.0"
     "symbol-tree" "^3.2.4"
-    "tough-cookie" "^4.0.0"
-    "w3c-hr-time" "^1.0.2"
+    "tough-cookie" "^4.1.2"
     "w3c-xmlserializer" "^3.0.0"
     "webidl-conversions" "^7.0.0"
     "whatwg-encoding" "^2.0.0"
     "whatwg-mimetype" "^3.0.0"
     "whatwg-url" "^11.0.0"
-    "ws" "^8.8.0"
+    "ws" "^8.9.0"
     "xml-name-validator" "^4.0.0"
 
 "jsesc@^2.5.1":
@@ -1381,10 +1370,10 @@
   dependencies:
     "boolbase" "^1.0.0"
 
-"nwsapi@^2.2.0":
-  "integrity" "sha512-JYOWTeFoS0Z93587vRJgASD5Ut11fYl5NyihP3KrYBvMe1FRRs6RN7m20SA/16GM4P6hTnZjT+UmDOt38UeXNg=="
-  "resolved" "https://mirrors.cloud.tencent.com/npm/nwsapi/-/nwsapi-2.2.1.tgz"
-  "version" "2.2.1"
+"nwsapi@^2.2.2":
+  "integrity" "sha512-90yv+6538zuvUMnN+zCr8LuV6bPFdq50304114vJYJ8RDyK8D5O9Phpbd6SZWgI7PwzmmfN1upeOJlvybDSgCw=="
+  "resolved" "https://registry.npmmirror.com/nwsapi/-/nwsapi-2.2.2.tgz"
+  "version" "2.2.2"
 
 "object-assign@^4.1.0":
   "integrity" "sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM="
@@ -1444,7 +1433,7 @@
   dependencies:
     "readable-stream" "^2.0.1"
 
-"parse5@^7.0.0", "parse5@^7.1.1":
+"parse5@^7.1.1":
   "integrity" "sha512-kwpuwzB+px5WUg9pyK0IcK/shltJN5/OVhQagxhCQNtT9Y9QRZqNY2e1cmbu/paRh5LMnz/oVTVLBpjFmMZhSg=="
   "resolved" "https://registry.npmmirror.com/parse5/-/parse5-7.1.1.tgz"
   "version" "7.1.1"
@@ -1903,7 +1892,7 @@
   dependencies:
     "through2" "^2.0.3"
 
-"tough-cookie@^4.0.0":
+"tough-cookie@^4.1.2":
   "integrity" "sha512-G9fqXWoYFZgTc2z8Q5zaHy/vJMjm+WV0AkAeHxVCQiEB1b+dGvWzFW6QV07cY5jQ5gRkeid2qIkzkxUnmoQZUQ=="
   "resolved" "https://mirrors.cloud.tencent.com/npm/tough-cookie/-/tough-cookie-4.1.2.tgz"
   "version" "4.1.2"
@@ -2085,13 +2074,6 @@
     "hash-sum" "^2.0.0"
     "loader-utils" "^2.0.0"
 
-"w3c-hr-time@^1.0.2":
-  "integrity" "sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ=="
-  "resolved" "https://mirrors.cloud.tencent.com/npm/w3c-hr-time/-/w3c-hr-time-1.0.2.tgz"
-  "version" "1.0.2"
-  dependencies:
-    "browser-process-hrtime" "^1.0.0"
-
 "w3c-xmlserializer@^3.0.0":
   "integrity" "sha512-3WFqGEgSXIyGhOmAFtlicJNMjEps8b1MG31NCA0/vOF9+nKMUW1ckhi9cnNHmf88Rzw5V+dwIwsm2C7X8k9aQg=="
   "resolved" "https://mirrors.cloud.tencent.com/npm/w3c-xmlserializer/-/w3c-xmlserializer-3.0.0.tgz"
@@ -2139,10 +2121,10 @@
   "resolved" "https://registry.nlark.com/ws/download/ws-7.5.1.tgz?cache=0&sync_timestamp=1624943898320&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fws%2Fdownload%2Fws-7.5.1.tgz"
   "version" "7.5.1"
 
-"ws@^8.8.0":
-  "integrity" "sha512-bGy2JzvzkPowEJV++hF07hAD6niYSr0JzBNo/J29WsB57A2r7Wlc1UFcTR9IzrPvuNVO4B8LGqF8qcpsVOhJCA=="
-  "resolved" "https://mirrors.tencent.com/npm/ws/-/ws-8.8.1.tgz"
-  "version" "8.8.1"
+"ws@^8.9.0":
+  "integrity" "sha512-Ja7nszREasGaYUYCI2k4lCKIRTt+y7XuqVoHR44YpI49TtryyqbqvDMn5eqfW7e6HzTukDRIsXqzVHScqRcafg=="
+  "resolved" "https://registry.npmmirror.com/ws/-/ws-8.9.0.tgz"
+  "version" "8.9.0"
 
 "xml-name-validator@^4.0.0":
   "integrity" "sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw=="
