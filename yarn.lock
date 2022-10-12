@@ -706,6 +706,39 @@
     "es6-iterator" "^2.0.3"
     "es6-symbol" "^3.1.1"
 
+"esbuild-darwin-64@0.15.10":
+  "integrity" "sha512-hbDJugTicqIm+WKZgp208d7FcXcaK8j2c0l+fqSJ3d2AzQAfjEYDRM3Z2oMeqSJ9uFxyj/muSACLdix7oTstRA=="
+  "resolved" "https://registry.npmmirror.com/esbuild-darwin-64/-/esbuild-darwin-64-0.15.10.tgz"
+  "version" "0.15.10"
+
+"esbuild@^0.15.10":
+  "integrity" "sha512-N7wBhfJ/E5fzn/SpNgX+oW2RLRjwaL8Y0ezqNqhjD6w0H2p0rDuEz2FKZqpqLnO8DCaWumKe8dsC/ljvVSSxng=="
+  "resolved" "https://registry.npmmirror.com/esbuild/-/esbuild-0.15.10.tgz"
+  "version" "0.15.10"
+  optionalDependencies:
+    "@esbuild/android-arm" "0.15.10"
+    "@esbuild/linux-loong64" "0.15.10"
+    "esbuild-android-64" "0.15.10"
+    "esbuild-android-arm64" "0.15.10"
+    "esbuild-darwin-64" "0.15.10"
+    "esbuild-darwin-arm64" "0.15.10"
+    "esbuild-freebsd-64" "0.15.10"
+    "esbuild-freebsd-arm64" "0.15.10"
+    "esbuild-linux-32" "0.15.10"
+    "esbuild-linux-64" "0.15.10"
+    "esbuild-linux-arm" "0.15.10"
+    "esbuild-linux-arm64" "0.15.10"
+    "esbuild-linux-mips64le" "0.15.10"
+    "esbuild-linux-ppc64le" "0.15.10"
+    "esbuild-linux-riscv64" "0.15.10"
+    "esbuild-linux-s390x" "0.15.10"
+    "esbuild-netbsd-64" "0.15.10"
+    "esbuild-openbsd-64" "0.15.10"
+    "esbuild-sunos-64" "0.15.10"
+    "esbuild-windows-32" "0.15.10"
+    "esbuild-windows-64" "0.15.10"
+    "esbuild-windows-arm64" "0.15.10"
+
 "escape-string-regexp@^1.0.3", "escape-string-regexp@^1.0.5":
   "integrity" "sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ="
   "resolved" "https://mirrors.tencent.com/npm/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz"

@@ -23,7 +23,7 @@ async function build() {
   // generate code and a sourcemap
   const data = await bundle.generate(outputOptions);
 
-  const [chunk] = data.output; // chunk: { imports: ['source-map'], exports: ['test'], type: 'chunk', code: '', map: null, fileName: 'test.js' }
+  const [chunk] = data.output; // chunk: { imports: ['source-map'], exports: ['test'], type: 'chunk', code: '', map: null, fileName: 'test.js'(输出的文件名), facadeModuleId: '/Users/kikitsin/learn/src/source-map.js'（entry的文件名） }
   console.log(chunk.imports); // an array of external dependencies
   console.log(chunk.exports); // an array of names exported by the entry point
   console.log(chunk.modules); // an array of module objects

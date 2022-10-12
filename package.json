@@ -23,6 +23,7 @@
     "chrome-remote-interface": "^0.31.0",
     "cli-color": "^2.0.2",
     "diff": "^5.0.0",
+    "esbuild": "^0.15.10",
     "eslump": "^3.0.0",
     "hash-sum": "^2.0.0",
     "markdown-it": "^12.2.0",
