@@ -20,6 +20,7 @@
   "homepage": "https://github.com/KikiTsin/learn#readme",
   "dependencies": {
     "acorn": "^8.6.0",
+    "autoprefixer": "^10.4.12",
     "chrome-remote-interface": "^0.31.0",
     "cli-color": "^2.0.2",
     "diff": "^5.0.0",
@@ -28,6 +29,7 @@
     "hash-sum": "^2.0.0",
     "markdown-it": "^12.2.0",
     "markdown-it-anchor": "^8.4.1",
+    "postcss-nested": "^6.0.0",
     "resolve": "^1.22.1",
     "rollup": "^2.79.1",
     "rxjs-spy": "^8.0.2",
@@ -50,7 +52,7 @@
     "memory-fs": "^0.5.0",
     "mime": "^2.5.2",
     "parse5": "^7.1.1",
-    "postcss": "^8.4.16",
+    "postcss": "^8.4.18",
     "postcss-css-variables": "^0.18.0",
     "rxjs": "^7.5.5",
     "stylis": "^4.1.1"
