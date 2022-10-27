@@ -381,10 +381,15 @@
     "ansi-styles" "^4.1.0"
     "supports-color" "^7.1.0"
 
-"chrome-remote-interface@^0.31.0":
-  "integrity" "sha1-C6VUkEfLvq3ayfiY3ON3IRcNKiE="
-  "resolved" "https://registry.nlark.com/chrome-remote-interface/download/chrome-remote-interface-0.31.0.tgz"
-  "version" "0.31.0"
+"chrome-devtools-frontend@^1.0.672485":
+  "integrity" "sha512-NV0mv1WGrO0qsNY52DNTfHMVWkb4C8G8hjcW029xNhIdoexBwn1k+tkYcU1S9uJjcsETv9alcmiHZdhe/iWGNQ=="
+  "resolved" "https://mirrors.cloud.tencent.com/npm/chrome-devtools-frontend/-/chrome-devtools-frontend-1.0.672485.tgz"
+  "version" "1.0.672485"
+
+"chrome-remote-interface@^0.31.3":
+  "integrity" "sha512-NTwb1YNPHXLTus1RjqsLxJmdViKwKJg/lrFEcM6pbyQy04Ow2QKWHXyPpxzwE+dFsJghWuvSAdTy4W0trluz1g=="
+  "resolved" "https://mirrors.cloud.tencent.com/npm/chrome-remote-interface/-/chrome-remote-interface-0.31.3.tgz"
+  "version" "0.31.3"
   dependencies:
     "commander" "2.11.x"
     "ws" "^7.2.0"
@@ -2228,13 +2233,13 @@
   "version" "1.0.2"
 
 "ws@^7.2.0":
-  "integrity" "sha1-RPwADYftsdnFPlH7xpoKwfaHHWY="
-  "resolved" "https://registry.nlark.com/ws/download/ws-7.5.1.tgz?cache=0&sync_timestamp=1624943898320&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fws%2Fdownload%2Fws-7.5.1.tgz"
-  "version" "7.5.1"
+  "integrity" "sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q=="
+  "resolved" "https://mirrors.cloud.tencent.com/npm/ws/-/ws-7.5.9.tgz"
+  "version" "7.5.9"
 
 "ws@^8.9.0":
   "integrity" "sha512-Ja7nszREasGaYUYCI2k4lCKIRTt+y7XuqVoHR44YpI49TtryyqbqvDMn5eqfW7e6HzTukDRIsXqzVHScqRcafg=="
-  "resolved" "https://registry.npmmirror.com/ws/-/ws-8.9.0.tgz"
+  "resolved" "https://mirrors.cloud.tencent.com/npm/ws/-/ws-8.9.0.tgz"
   "version" "8.9.0"
 
 "xml-name-validator@^4.0.0":
