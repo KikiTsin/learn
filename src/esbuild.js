@@ -1,4 +1,28 @@
-import { build } from 'esbuild'
+import { build, transformSync } from 'esbuild'
+
+// transform的话，转换后的代码中还有require，需要做额外的处理
+
+let transformCode = transformSync(`const dynamicImport = () => {
+    return import('./kiki');
+}
+
+dynamicImport()
+
+const kiki = 'kiki123'
+
+export default kiki`, {
+    loader: 'js',
+    target: [
+    'es2017',
+    'chrome58',
+    'edge16',
+    'firefox57',
+    'node12',
+    'safari11',
+    ],
+})
+
+console.log(transformCode.code)
 
 let esbuildScanPlugin = {
     name: 'esbuild-scan',
@@ -7,7 +31,7 @@ let esbuildScanPlugin = {
         // A callback added using onResolve will be run on each import path in each module that esbuild builds.
         // 只过滤import引入
         build.onResolve({
-            filter: /lodash/
+            filter: /kiki/
         }, args => {
             // IMPORTANT!!!
             // args = {
@@ -51,7 +75,7 @@ let esbuildScanPlugin = {
             //   }
             // 重写contents后打包出来的代码 会替换掉原来的import * from 'https://lodash.js' 为 kiki-contents;
             return {
-                contents: 'kiki-contents'
+                contents: `import d from "${args.path}";export default d;`
             }
             // the res.outputFiles[0].text turns to :
             // kiki-test:https://unpkg.com/lodash-es@4.17.15/lodash.js
@@ -68,33 +92,33 @@ let esbuildScanPlugin = {
     }
 }
 
-let esbuildResults = build({
-    absWorkingDir: process.cwd(),
-    write: false, // 不写入磁盘，in-memory buffers
-    entryPoints: ['src/esbuild-test.js'],
-    bundle: true,
-    format: 'esm',
-    logLevel: 'error',
-    plugins: [
-        esbuildScanPlugin // 这个插件处理了html文件，否则会报错：No loader is configured for ".html" files: src/esbuild-test.html
-    ]
-})
-esbuildResults.then((res) => {
-    // res = {
-    //     errors: [],
-    //     warnings: [],
-    //     outputFiles: [
-    //         {
-    //             path: '<stdout>',
-    //             contents: 'buffers',
-    //             text: `// src/esbuild-test.js
-    //             var kiki = "kiki123";
-    //             var esbuild_test_default = kiki;
-    //             export {
-    //               esbuild_test_default as default
-    //             };`
-    //         }
-    //     ]
-    // }
-    console.log('esbuild results:', res)
-})
+// let esbuildResults = build({
+//     absWorkingDir: process.cwd(),
+//     write: false, // 不写入磁盘，in-memory buffers
+//     entryPoints: ['src/esbuild-test.js'],
+//     bundle: true,
+//     format: 'esm',
+//     logLevel: 'error',
+//     plugins: [
+//         // esbuildScanPlugin // 这个插件处理了html文件，否则会报错：No loader is configured for ".html" files: src/esbuild-test.html
+//     ]
+// })
+// esbuildResults.then((res) => {
+//     // res = {
+//     //     errors: [],
+//     //     warnings: [],
+//     //     outputFiles: [
+//     //         {
+//     //             path: '<stdout>',
+//     //             contents: 'buffers',
+//     //             text: `// src/esbuild-test.js
+//     //             var kiki = "kiki123";
+//     //             var esbuild_test_default = kiki;
+//     //             export {
+//     //               esbuild_test_default as default
+//     //             };`
+//     //         }
+//     //     ]
+//     // }
+//     console.log('esbuild results:', res.outputFiles[0].text)
+// })

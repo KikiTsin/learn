@@ -1,5 +1,27 @@
 import sourceMap from "source-map";
 
+// 除了source-map可以生成mapping外，还有magicString, webpack-sources可以生成mappings
+
+// magicString没有缓存，需要自己额外做；webpack-sources带了缓存。
+
+// import { ConcatSource, CachedSource, SourceMapSource } from 'webpack-sources';
+
+// const module1Map = {}
+// const module1 = new CachedSource(new SourceMapSource('code1'), 'module1.js', module1Map)
+// const module2 = new CachedSource(new SourceMapSource('code2'), 'module2.js', module1Map)
+
+// function bundle(){
+//     const concatSource = new ConcatSource();
+//     concatSource.add(module1)
+//     concatSource.add(module2)
+//     const { source, map } = concatSource.sourceAndMap();
+//     return {
+//       code: source,
+//       map,
+//     };
+// }
+
+
 let SourceMapGenerator = sourceMap.SourceMapGenerator;
 
 var map = new SourceMapGenerator({
