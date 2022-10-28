@@ -14,7 +14,7 @@
             "type": "pwa-node"
         },
         {
-            "name": "rollup-bundle",
+            "name": "rollup",
             "program": "${workspaceFolder}/src/rollup.js",
             "request": "launch",
             "skipFiles": [

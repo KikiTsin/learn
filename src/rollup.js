@@ -1,18 +1,22 @@
 import { rollup } from "rollup";
 import rollupPlugin from './rollup-plugin.js'
+import util from 'node:util'
 // see below for details on the options
 const inputOptions = {
-    input: 'src/source-map.js',
+    input: 'src/util.js',
     plugins: [rollupPlugin()],
     external: [
-      'source-map'
+      // 'source-map'
     ]
 };
 const outputOptions = {
-    format: 'iife',
-    file: 'src/test.js',
+    format: 'cjs',
     globals: {
-      'source-map': 'sourceMap'
+      // 'source-map': 'sourceMap'
+    },
+    output: {
+      exports: "named",
+      file: 'src/test.js'
     },
     name: 'kiki',
     rollupOptions: {
@@ -46,16 +50,16 @@ const outputOptions = {
         // },
         // 会把react react-dom都打包进react-vendor.js这个文件内，但是lodash antd acro就会被打包进index.js，如果没有特殊处理的话
         // 3. 函数配置，解决循环依赖的问题
-        manualChunks(id, { getModuleInfo }) { 
-          console.log('id', id)
-          console.log('getModuleInfo', getModuleInfo)
-          for (const group of Object.keys(chunkGroups)) {
-            const deps = chunkGroups[group];
-            if (id.includes('node_modules') && isDepInclude(id, deps, [], getModuleInfo)) { 
-              return group;
-            }
-          }
-        },
+        // manualChunks(id, { getModuleInfo }) { 
+        //   console.log('id', id)
+        //   console.log('getModuleInfo', getModuleInfo)
+        //   for (const group of Object.keys(chunkGroups)) {
+        //     const deps = chunkGroups[group];
+        //     if (id.includes('node_modules') && isDepInclude(id, deps, [], getModuleInfo)) { 
+        //       return group;
+        //     }
+        //   }
+        // },
       },
     },
 };
@@ -64,7 +68,7 @@ async function build() {
   // create a bundle
   const bundle = await rollup(inputOptions);
 
-  console.log('bundle', bundle)
+  console.log(util.inspect(bundle.cache.modules, { colors: true, depth: null }))
   // generate code and a sourcemap
   const data = await bundle.generate(outputOptions);
 

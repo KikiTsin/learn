@@ -2,27 +2,27 @@ import { build, transformSync } from 'esbuild'
 
 // transform的话，转换后的代码中还有require，需要做额外的处理
 
-let transformCode = transformSync(`const dynamicImport = () => {
-    return import('./kiki');
-}
+// let transformCode = transformSync(`const dynamicImport = () => {
+//     return import('./kiki');
+// }
 
-dynamicImport()
+// dynamicImport()
 
-const kiki = 'kiki123'
+// const kiki = 'kiki123'
 
-export default kiki`, {
-    loader: 'js',
-    target: [
-    'es2017',
-    'chrome58',
-    'edge16',
-    'firefox57',
-    'node12',
-    'safari11',
-    ],
-})
+// export default kiki`, {
+//     loader: 'js',
+//     target: [
+//     'es2017',
+//     'chrome58',
+//     'edge16',
+//     'firefox57',
+//     'node12',
+//     'safari11',
+//     ],
+// })
 
-console.log(transformCode.code)
+// console.log(transformCode.code)
 
 let esbuildScanPlugin = {
     name: 'esbuild-scan',
@@ -92,33 +92,84 @@ let esbuildScanPlugin = {
     }
 }
 
-// let esbuildResults = build({
-//     absWorkingDir: process.cwd(),
-//     write: false, // 不写入磁盘，in-memory buffers
-//     entryPoints: ['src/esbuild-test.js'],
-//     bundle: true,
-//     format: 'esm',
-//     logLevel: 'error',
-//     plugins: [
-//         // esbuildScanPlugin // 这个插件处理了html文件，否则会报错：No loader is configured for ".html" files: src/esbuild-test.html
-//     ]
-// })
-// esbuildResults.then((res) => {
-//     // res = {
-//     //     errors: [],
-//     //     warnings: [],
-//     //     outputFiles: [
-//     //         {
-//     //             path: '<stdout>',
-//     //             contents: 'buffers',
-//     //             text: `// src/esbuild-test.js
-//     //             var kiki = "kiki123";
-//     //             var esbuild_test_default = kiki;
-//     //             export {
-//     //               esbuild_test_default as default
-//     //             };`
-//     //         }
-//     //     ]
-//     // }
-//     console.log('esbuild results:', res.outputFiles[0].text)
-// })
+let regFib = /^fib((\d*))/;
+
+let virtualModuleFn = {
+    name: 'esbuild-virtual-module-fn',
+    setup(build) {
+        build.onResolve({ filter: regFib }, args => {
+            console.log('fn args', args)
+            return { path: args.path, namespace: 'fib' }
+        })
+        build.onLoad({ filter: regFib, namespace: 'fib' }, args => {
+                let match = regFib.exec(args.path), n = +match[1]
+                let contents = n < 2 ? `export default ${n}` : `
+                    import n1 from 'fib(${n - 1}) ${args.path}'
+                    import n2 from 'fib(${n - 2}) ${args.path}'
+                    export default n1 + n2`
+                return { contents }
+        })
+    }
+}
+
+let envPlugin = {
+    name: 'env',
+    setup(build) {
+      // Intercept import paths called "env" so esbuild doesn't attempt
+      // to map them to a file system location. Tag them with the "env-ns"
+      // namespace to reserve them for this plugin.
+      build.onResolve({ filter: /^env$/ }, args => {
+          console.log('args')
+          return {
+            path: args.path,
+            namespace: 'env-ns',
+          }
+      })
+  
+      // Load paths tagged with the "env-ns" namespace and behave as if
+      // they point to a JSON file containing the environment variables.
+      build.onLoad({ filter: /.*/, namespace: 'env-ns' }, () => {
+          console.log('load---->')
+          return {
+            contents: JSON.stringify({
+                NODE_ENV: 'NODE_ENV_STG'
+            }),
+            loader: 'json',
+          }
+      })
+    },
+  }
+  
+
+let esbuildResults = build({
+    absWorkingDir: process.cwd(),
+    write: false, // 不写入磁盘，in-memory buffers
+    entryPoints: ['src/util.js'],
+    bundle: true,
+    format: 'cjs',
+    logLevel: 'error',
+    plugins: [
+        // envPlugin,
+        // virtualModuleFn
+        // esbuildScanPlugin // 这个插件处理了html文件，否则会报错：No loader is configured for ".html" files: src/esbuild-test.html
+    ]
+})
+esbuildResults.then((res) => {
+    // res = {
+    //     errors: [],
+    //     warnings: [],
+    //     outputFiles: [
+    //         {
+    //             path: '<stdout>',
+    //             contents: 'buffers',
+    //             text: `// src/esbuild-test.js
+    //             var kiki = "kiki123";
+    //             var esbuild_test_default = kiki;
+    //             export {
+    //               esbuild_test_default as default
+    //             };`
+    //         }
+    //     ]
+    // }
+    console.log('esbuild results:', res.outputFiles[0].text)
+})
