@@ -157,7 +157,9 @@ function strip(options = {}) {
 ```
 
 ## esbuild
+
 [why fast](https://esbuild.github.io/faq/#why-is-esbuild-fast)
+
 - 用go编写，并且编译成native code；JS JIT即时编译性能不高；
 - go是为并行设计的，而JS不是。GO可以在线程之间共享内存；
 - esbuild从零开始，避免了引用第三方库带来的不同ast之间转译的问题。
@@ -166,5 +168,74 @@ function strip(options = {}) {
 cmd/esbuild/main.go主入口文件，cli.Run(osArgs)
 pkg/cli/cli.go
 pkg/api/api_impl.go
+
+### esbuild plugin
+
+#### 基本概念
+
+##### Namespaces/Virtual Module
+
+每个模块都有一个命名空间。
+
+- 默认是file，对应的是是文件系统内的真实文件。
+- esbuild额外提供了一个概念：虚拟模块（virtual module），也就是，即使import导入的文件A不真实存在于文件系统内，也能被解析；插件提供了一种创建虚拟模块的能力。
+
+##### onResolve/onLoad
+
+<font color="orange">onResolve</font>
+解析每个模块的import导入时执行；可以用来标记需要特殊处理的模块，比如标记命名空间，或者更改文件路径。
+
+<font color="orange">onLoad</font>
+加载文件路径/命名空间，并指定不同的loader来编译该文件。
+
+#### Vite中esbuild插件的用法
+
+##### vite:dep-scan
+
+```js
+return {
+  name: 'vite:dep-scan',
+  setup(build) {
+    const scripts: Record<string, OnLoadResult> = {}
+
+    // external urls
+    build.onResolve({ filter: externalRE }, ({ path }) => ({
+      path,
+      external: true
+    }))
+
+    // local scripts (`<script>` in Svelte and `<script setup>` in Vue)
+    build.onResolve({ filter: virtualModuleRE }, ({ path }) => {
+      return {
+        // strip prefix to get valid filesystem path so esbuild can resolve imports in the file
+        path: path.replace(virtualModulePrefix, ''),
+        namespace: 'script'
+      }
+    })
+
+    build.onLoad({ filter: /.*/, namespace: 'script' }, ({ path }) => {
+      return scripts[path]
+    })
+
+    // extract scripts inside HTML-like files and treat it as a js module
+    // const htmlTypesRE = /\.(html|vue|svelte|astro|imba)$/
+    build.onLoad(
+      { filter: htmlTypesRE, namespace: 'html' },
+      async ({ path }) => {
+        let raw = fs.readFileSync(path, 'utf-8')
+        
+        // ...省略
+        return {
+          loader: 'js',
+          contents: js
+        }
+      }
+    )
+    
+    // ... bare imports
+    // css & json & wasm
+  }
+}
+```
 
 **TODO 学习下GO**
