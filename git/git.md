@@ -6,6 +6,8 @@
 
 - --verify 验证是否有效，是则返回值。
 - --git-dir 展示.git的相对/绝对路径。
+- --show-toplevel 显示顶级目录的绝对路径。
+- --is-inside-work-tree 当前工作目录位于存储库目录下方时，打印'true'； 否则打印'false'
 
 ```js
 const commitHash = require('child_process')
