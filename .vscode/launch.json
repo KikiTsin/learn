@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "esbuild",
-            "program": "${workspaceFolder}/src/esbuild.js",
+            "program": "${workspaceFolder}/1.js",
             "request": "launch",
             "skipFiles": [
                 "<node_internals>/**"
