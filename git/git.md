@@ -14,8 +14,8 @@ const commitHash = require('child_process')
   .execSync('git rev-parse --short feat/aria-label-breadcrumbs', { encoding: 'utf-8' })
   .trim();
 
-// git rev-parse HEAD   a952d5f9b07f9cbbcd2887b7d0611ea729f308d8
-// git rev-parse --short HEAD a952d5f9b
+// git rev-parse HEAD   这个命令会 返回某个分支最近一条commit记录的hash值：a952d5f9b07f9cbbcd2887b7d0611ea729f308d8
+// git rev-parse --short HEAD a952d5f9b 返回简短值，一般是完整commit的前8位
 
 console.log(commitHash);
 ```
