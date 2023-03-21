@@ -19,3 +19,9 @@ const commitHash = require('child_process')
 
 console.log(commitHash);
 ```
+
+## git shortlog
+
+[git shortlog](https://git-scm.com/docs/git-shortlog)
+
+对git log信息进行分组，比如 git shortlog -n --after="2023-03-01" --before '2023-03-31' --all --no-merges 这个命令，就表示: 根据提交者的提交数倒叙排列（而非作者名字首字母排序），从2023-03-01到2023-03-31这个时间段内所有分支（--all 不加的只展示当前分支）的排除 git merge产生的commit外的所有commits。
