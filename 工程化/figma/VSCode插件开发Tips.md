@@ -65,6 +65,10 @@ export default [
 }
 ```
 
+## 调试
+
+操作`cmd + shift + p`，输入`web view develop tool`即可调试。
+
 ## 渲染页面
 
 createWebviewPanel 创建 webview，渲染页面，可以在 html 内夹在本地资源，可以加载线上资源。
