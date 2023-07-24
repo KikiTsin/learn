@@ -67,7 +67,8 @@ export default [
 
 ## 调试
 
-操作`cmd + shift + p`，输入`web view develop tool`即可调试。
+- 调试 extension.js，小蜘蛛运行后，打断点调试，`cmd + r`刷新插件。
+- 操作`cmd + shift + p`，输入`web view develop tool`即可调试 webview。
 
 ## 渲染页面
 
