@@ -68,3 +68,6 @@
 - simple-git 函数式调用git方法，比如 git.status() git.add git.commit
 - [react-docgen-typescript](https://github.com/KikiTsin/react-docgen-typescript) 解析react component的props类型.
 - gatsby 用来构建react静态站点。
+- zod
+- cosmiconfig
+- ts-morph
